@@ -8,6 +8,7 @@ const numTpl = `
 	{{ template "const" . }}
 	{{ template "ltgt" . }}
 	{{ template "in" . }}
+	{{ template "required" . }}
 
 	{{ if .Rules.GetIgnoreEmpty }}
 		}

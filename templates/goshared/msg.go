@@ -26,14 +26,20 @@ func (m {{ (msgTyp .).Pointer }}) validate(all bool) error {
 		return nil
 	{{ else -}}
 		if m == nil { return nil }
-
 		var errors []error
 
+		/*optional字段验证:*/
+		{{ range .Fields }}
+				{{ if .HasOptionalKeyword }}
+					{{ render (context .) }}
+				{{ end }}
+		{{ end }}
+		/*没有前置关键字的字段的验证:*/
 		{{ range .NonOneOfFields }}
 			{{ render (context .) }}
 		{{ end }}
-
-		{{ range .OneOfs }}
+		/*有oneOf前置关键字的字段的验证:*/
+		{{ range .RealOneOfs }}
 			switch m.{{ name . }}.(type) {
 				{{ range .Fields }}
 					case {{ oneof . }}:
@@ -111,11 +117,11 @@ func (e {{ errname . }}) Error() string {
 
 	key := ""
 	if e.key {
-		key = "key for "
+		key = "的字段 "
 	}
 
 	return fmt.Sprintf(
-		"invalid %s{{ (msgTyp .) }}.%s: %s%s",
+		"{{ (msgTyp .) }}%s的%s不合适,原因是:%s%s",
 		key,
 		e.field,
 		e.reason,

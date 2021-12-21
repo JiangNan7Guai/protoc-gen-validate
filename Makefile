@@ -106,6 +106,8 @@ testcases: bin/protoc-gen-go ## generate the test harness case protos
 
 validate/validate.pb.go: bin/protoc-gen-go validate/validate.proto
 	protoc -I . \
+		 -I ${GOPATH}/src/github.com/protocolbuffers/protobuf/src \
+		 -I ${GOPATH}/src/github.com/googleapis/googleapis \
 		--plugin=protoc-gen-go=${GOPATH}/bin/protoc-gen-go \
 		--go_opt=paths=source_relative \
 		--go_out="${GO_IMPORT}:." validate/validate.proto
@@ -113,6 +115,8 @@ validate/validate.pb.go: bin/protoc-gen-go validate/validate.proto
 tests/harness/go/harness.pb.go: bin/protoc-gen-go tests/harness/harness.proto
 	# generates the test harness protos
 	cd tests/harness && protoc -I . \
+-I ${GOPATH}/src/github.com/googleapis/googleapis \
+		 -I ${GOPATH}/src/github.com/protocolbuffers/protobuf/src \
 		--plugin=protoc-gen-go=${GOPATH}/bin/protoc-gen-go \
 		--go_out="module=${PACKAGE}/tests/harness/go,${GO_IMPORT}:./go" harness.proto
 

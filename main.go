@@ -1,14 +1,15 @@
 package main
 
 import (
+	"github.com/envoyproxy/protoc-gen-validate/module"
 	"github.com/lyft/protoc-gen-star"
 	"github.com/lyft/protoc-gen-star/lang/go"
-	"github.com/envoyproxy/protoc-gen-validate/module"
 )
 
 func main() {
+	fk := uint64(1)
 	pgs.
-		Init(pgs.DebugEnv("DEBUG_PGV")).
+		Init(pgs.DebugEnv("DEBUG_PGV"), pgs.SupportedFeatures(&fk)).
 		RegisterModule(module.Validator()).
 		RegisterPostProcessor(pgsgo.GoFmt()).
 		Render()
