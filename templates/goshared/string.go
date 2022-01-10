@@ -9,7 +9,7 @@ const strTpl = `
 
 	{{ template "const" . }}
 	{{ template "in" . }}
-
+	{{ template "required" . }}
 	{{ if or $r.Len (and $r.MinLen $r.MaxLen (eq $r.GetMinLen $r.GetMaxLen)) }}
 		{{ if $r.Len }}
 		if utf8.RuneCountInString({{ accessor . }}) != {{ $r.GetLen }} {
