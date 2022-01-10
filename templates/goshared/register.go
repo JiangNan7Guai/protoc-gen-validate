@@ -110,7 +110,7 @@ func (fns goSharedFuncs) multiErrName(m pgs.Message) pgs.Name {
 
 func (fns goSharedFuncs) errIdxCause(ctx shared.RuleContext, idx, cause string, reason ...interface{}) string {
 	f := ctx.Field
-	n := fns.Name(f)
+	n := fns.Name(f).LowerSnakeCase()
 
 	var fld string
 	if idx != "" {
