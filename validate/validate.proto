@@ -282,6 +282,8 @@ message UInt64Rules {
   // IgnoreEmpty specifies that the validation rules of this field should be
   // evaluated only if the field is not empty
   optional bool ignore_empty = 8;
+  // Required specifies that this field must be set
+  optional bool required = 9;
 }
 
 // SInt32Rules describes the constraints applied to `sint32` values
