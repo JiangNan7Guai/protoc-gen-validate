@@ -9,7 +9,7 @@ const messageTpl = `
 	{
 		pgv::ValidationMsg inner_err;
 		if ({{ hasAccessor .}} && !pgv::Validator<{{ ctype $f.Type }}>::CheckMessage({{ accessor . }}, &inner_err)) {
-			{{ errCause . "inner_err" "embedded message failed validation" }}
+			{{ errCause . "inner_err" "下级参数有误" }}
 		}
 	}
 	{{ end }}

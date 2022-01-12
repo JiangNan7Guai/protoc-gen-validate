@@ -112,17 +112,16 @@ func (e {{ errname . }}) ErrorName() string { return "{{ errname . }}" }
 func (e {{ errname . }}) Error() string {
 	cause := ""
 	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+		cause = fmt.Sprintf(",错误内容为: %v", e.cause)
 	}
 
-	key := ""
-	if e.key {
-		key = "的字段 "
-	}
+	//key := ""
+	//if e.key {
+	//	key = "的字段 "
+	//}
 
 	return fmt.Sprintf(
-		"{{ (msgTyp .) }}%s的%s不合适,原因是:%s%s",
-		key,
+		"参数%s不合适,原因是:%s%s",
 		e.field,
 		e.reason,
 		cause)
