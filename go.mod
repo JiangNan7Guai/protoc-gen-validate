@@ -1,4 +1,4 @@
-module github.com/envoyproxy/protoc-gen-validate
+module github.com/JiangNan7Guai/protoc-gen-validate
 
 go 1.12
 
